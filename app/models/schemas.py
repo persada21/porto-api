@@ -147,3 +147,34 @@ class ContributionStats(BaseModel):
     streak_days: Optional[int]
     longest_streak_days: Optional[int]
 
+
+class AIPersonaResponse(BaseModel):
+    """AI Persona analysis response"""
+    persona: str
+    vibe: str
+    traits: List[str]
+    commit_distribution: Dict[str, int]
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "persona": "The Creator",
+                "vibe": "Always building something new. A true innovator.",
+                "traits": ["Prolific", "Balanced"],
+                "commit_distribution": {"feat": 10, "fix": 2, "other": 1}
+            }
+        }
+
+
+class AICommitResponse(BaseModel):
+    """AI Generated commit response"""
+    generated_message: str
+    source_commits_count: int
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "generated_message": "feat: add new endpoint for user data",
+                "source_commits_count": 50
+            }
+        }
