@@ -96,6 +96,38 @@ The application will be available at:
 - `GET /` - API information and available endpoints
 - `GET /api/v1/health` - Health check endpoint
 
+### AI Powered Endpoints
+
+All AI endpoints are prefixed with `/api/v1/github/{username}/ai`
+
+#### Analyze Developer Persona
+```http
+GET /api/v1/github/{username}/ai/persona
+```
+
+**Example:**
+```bash
+curl http://localhost:8000/api/v1/github/octocat/ai/persona
+```
+
+**Response includes:**
+- **Persona**: Your developer archetype (e.g., "The Creator", "The Fixer")
+- **Vibe**: A description of your coding style
+- **Traits**: Key characteristics extracted from your activity
+- **Commit Distribution**: Breakdown of commit types
+
+#### Generate Commit Message
+```http
+GET /api/v1/github/{username}/ai/generate-commit
+```
+
+**Example:**
+```bash
+curl http://localhost:8000/api/v1/github/octocat/ai/generate-commit
+```
+
+Generates a commit message based on your previous commit history using a Markov Chain model.
+
 ### GitHub Profile Endpoints
 
 All GitHub endpoints are prefixed with `/api/v1/github/{username}`

@@ -242,6 +242,12 @@ class GitHubService:
             "has_projects": repo_data.get("has_projects", False)
         }
 
+    async def get_user_events(self, username: str, limit: int = 30) -> List[Dict]:
+        """Get user public events"""
+        params = {"per_page": limit}
+        events = await self._make_request(f"/users/{username}/events/public", params)
+        return events
+
 
 # Create service instance
 github_service = GitHubService()
