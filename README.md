@@ -128,6 +128,34 @@ curl http://localhost:8000/api/v1/github/octocat/ai/generate-commit
 
 Generates a commit message based on your previous commit history using a Markov Chain model.
 
+### Chat with GitHub (RAG)
+
+Ask questions about a user's repositories and code.
+
+#### Ask a Question
+```http
+POST /api/v1/github/{username}/rag/ask
+```
+
+**Body:**
+```json
+{
+  "query": "What machine learning projects has this user built?"
+}
+```
+
+**Example:**
+```bash
+curl -X POST http://localhost:8000/api/v1/github/octocat/rag/ask \
+  -H "Content-Type: application/json" \
+  -d '{"query": "Does this user know Python?"}'
+```
+
+**Response includes:**
+- **Answer**: Generated response based on repository analysis
+- **Sources**: List of repositories used to answer
+- **Context Used**: Snippets of text that informed the answer
+
 ### GitHub Profile Endpoints
 
 All GitHub endpoints are prefixed with `/api/v1/github/{username}`

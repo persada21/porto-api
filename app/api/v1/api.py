@@ -3,7 +3,7 @@ API v1 router aggregation
 """
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import github, health, ai
+from app.api.v1.endpoints import github, health, ai, rag
 
 api_router = APIRouter()
 
@@ -18,5 +18,10 @@ api_router.include_router(
     ai.router,
     prefix="/github/{username}/ai",
     tags=["AI"]
+)
+api_router.include_router(
+    rag.router,
+    prefix="/github/{username}/rag",
+    tags=["RAG"]
 )
 

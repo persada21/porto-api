@@ -248,6 +248,25 @@ class GitHubService:
         events = await self._make_request(f"/users/{username}/events/public", params)
         return events
 
+    async def get_readme_content(self, username: str, repo_name: str) -> Optional[str]:
+        """Get repository README content"""
+        try:
+            # Using raw media type header to get content directly
+            headers = self.headers.copy()
+            headers["Accept"] = "application/vnd.github.raw"
+
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    f"{self.base_url}/repos/{username}/{repo_name}/readme",
+                    headers=headers,
+                    timeout=self.timeout
+                )
+                if response.status_code == 200:
+                    return response.text
+                return None
+        except Exception:
+            return None
+
 
 # Create service instance
 github_service = GitHubService()

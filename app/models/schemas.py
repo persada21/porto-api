@@ -178,3 +178,31 @@ class AICommitResponse(BaseModel):
                 "source_commits_count": 50
             }
         }
+
+
+class RAGQueryRequest(BaseModel):
+    """RAG Query Request schema"""
+    query: str
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "query": "What technologies does this user work with?"
+            }
+        }
+
+
+class RAGResponse(BaseModel):
+    """RAG Response schema"""
+    answer: str
+    sources: List[str]
+    context_used: List[str]
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "answer": "The user works primarily with Python and FastAPI...",
+                "sources": ["fastapi-project", "another-repo"],
+                "context_used": ["Repository: fastapi-project...", "README for..."]
+            }
+        }
